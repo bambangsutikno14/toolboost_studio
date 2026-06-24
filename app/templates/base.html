@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="{{ page_lang|default('en') }}" dir="{{ page_dir|default('ltr') }}">
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}{{ page_title|default(site_name) }} - {{ site_name }}{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{% block meta_description %}{{ page_description|default(brand.positioning) }}{% endblock %}">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  {% if canonical %}<link rel="canonical" href="{{ canonical }}">{% endif %}
+  {% for link in hreflang_links %}
+  <link rel="alternate" hreflang="{{ link.lang }}" href="{{ link.url }}">
+  {% endfor %}
+  {% if gsc_code %}<meta name="google-site-verification" content="{{ gsc_code }}">{% endif %}
+  <link rel="icon" href="{{ url_for('static', filename='img/favicon.svg') }}" type="image/svg+xml">
+  <meta property="og:title" content="{{ page_title|default(site_name) }}">
+  <meta property="og:description" content="{{ page_description|default(brand.positioning) }}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ canonical|default(site_domain) }}">
+  <meta name="twitter:card" content="summary">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  {{ adsense_script()|safe }}
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/" aria-label="{{ site_name }} home">
+    <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="{{ site_name }}" class="brand-logo">
+  </a>
+  <nav>
+    <a href="/">Tools</a>
+    <a href="/guides">Guides</a>
+    <a href="/examples">Examples</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+  </nav>
+</header>
+
+<div class="language-bar">
+  <span>Global:</span>
+  {% for code, item in languages.items() %}
+    <a href="/{{ code }}/" {% if code == page_lang %}class="active"{% endif %}>{{ item.native }}</a>
+  {% endfor %}
+</div>
+
+<main class="container">
+  {{ ad_block("top")|safe }}
+  {% block content %}{% endblock %}
+  {{ ad_block("bottom")|safe }}
+</main>
+
+<footer class="footer">
+  <p>&copy; {{ year }} {{ site_name }}. {{ brand.tagline }}.</p>
+  <p><a href="/privacy">Privacy</a> | <a href="/terms">Terms</a> | <a href="/about">About</a> | <a href="/contact">Contact</a></p>
+</footer>
+</body>
+</html>

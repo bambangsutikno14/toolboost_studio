@@ -1,0 +1,22 @@
+TOOLBOOST STUDIO - BRAND & TRUST QA CHECKLIST
+
+Sudah dibuat oleh patch:
+[OK] Nama brand final: ToolBoost Studio
+[OK] Logo SVG: app/static/img/logo.svg
+[OK] Favicon SVG: app/static/img/favicon.svg
+[OK] Halaman About: /about
+[OK] Privacy Policy lebih lengkap: /privacy
+[OK] Terms of Service lebih sesuai produk: /terms
+[OK] Contact page lebih profesional: /contact
+[OK] Screenshot contoh: /examples
+[OK] 3-5 contoh input-output setiap tool utama
+[OK] FAQ original setiap tool
+[OK] Internal link antar tool dan guide
+[OK] Sitemap include /about dan /examples
+
+Yang masih harus Anda isi manual:
+[ ] Buat email aktif, contoh Gmail baru atau email domain.
+[ ] Ubah CONTACT_EMAIL di .env.
+[ ] Ganti screenshot SVG dengan screenshot asli setelah online.
+[ ] Review Privacy dan Terms sesuai negara/hosting/analytics/iklan yang dipakai.
+[ ] Cek semua halaman di browser.

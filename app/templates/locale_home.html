@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}{{ locale.title }} - {{ site_name }}{% endblock %}
+{% block meta_description %}{{ locale.description }}{% endblock %}
+{% block content %}
+<section class="hero">
+  <p class="eyebrow">{{ locale.market }}</p>
+  <h1>{{ locale.hero }}</h1>
+  <p>{{ locale.subhero }}</p>
+  <p class="note">{{ locale.description }}</p>
+  <div class="hero-actions">
+    <a class="button-link" href="/{{ page_lang }}/tools/title-generator">{{ locale.cta }}</a>
+    <a class="button-link secondary" href="/guides">{{ locale.guides }}</a>
+  </div>
+</section>
+
+<section class="language-panel">
+  <h2>Global language versions</h2>
+  <p>This site uses separate URLs for each language version and includes hreflang signals for international SEO.</p>
+  <div class="lang-grid">
+    {% for code, item in languages.items() %}
+      <a href="/{{ code }}/" class="{% if code == page_lang %}active{% endif %}">{{ item.native }}</a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section-title">
+  <h2>{{ locale.tools_label }}</h2>
+  <p>Localized landing pages help users from different countries find the correct tool and language version.</p>
+</section>
+
+<section class="grid">
+  {% for tool in tools %}
+  <a class="card" href="/{{ page_lang }}/tools/{{ tool.slug }}">
+    <h2>{{ tool.name_local }}</h2>
+    <p>{{ tool.desc_local }}</p>
+    <span class="pill">{{ tool.intent }}</span>
+  </a>
+  {% endfor %}
+</section>
+
+<section class="content">
+  <h2>SEO market focus</h2>
+  <p>Primary keywords for this language: {{ ", ".join(locale.keywords) }}.</p>
+  <p>Before scaling pages aggressively, review each language version manually and improve examples for the target country.</p>
+</section>
+{% endblock %}

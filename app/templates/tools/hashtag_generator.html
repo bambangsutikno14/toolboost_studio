@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}Hashtag Generator - {{ site_name }}{% endblock %}
+{% block content %}
+<h1>Hashtag Generator</h1>
+<form method="post" class="tool-form"><label>Topik / caption</label><textarea name="text" placeholder="Paste caption or topic">{{ text }}</textarea><button type="submit">Generate</button></form>
+{% if result %}<div class="result"><h2>Hasil</h2><p class="copybox">{{ " ".join(result) }}</p></div>{% endif %}
+<section class="content"><h2>Tips hashtag</h2><p>Campurkan hashtag niche, medium, dan broad. Jangan memakai hashtag yang tidak relevan.</p></section>
+{% endblock %}

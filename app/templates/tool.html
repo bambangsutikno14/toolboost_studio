@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}{{ tool.name }} - {{ site_name }}{% endblock %}
+{% block meta_description %}{{ tool.summary }}{% endblock %}
+{% block content %}
+<article class="article">
+  <p class="eyebrow">{{ tool.category }}</p>
+  <h1>{{ tool.name }}</h1>
+  <p class="lead">{{ tool.summary }}</p>
+
+  <form method="post" class="tool-form">
+    {% if tool.slug == 'utm-builder' %}
+      <label>URL</label><input name="url" value="{{ form.get('url','') }}" placeholder="https://example.com/page">
+      <label>Source</label><input name="source" value="{{ form.get('source','') }}" placeholder="google, tiktok, newsletter">
+      <label>Medium</label><input name="medium" value="{{ form.get('medium','') }}" placeholder="organic, social, email, cpc">
+      <label>Campaign</label><input name="campaign" value="{{ form.get('campaign','') }}" placeholder="launch_campaign">
+      <label>Term optional</label><input name="term" value="{{ form.get('term','') }}">
+      <label>Content optional</label><input name="content" value="{{ form.get('content','') }}">
+    {% elif tool.slug == 'content-brief-generator' %}
+      <label>Topic</label><input name="topic" value="{{ form.get('topic','') }}" placeholder="{{ tool.input_placeholder }}">
+      <label>Audience</label><input name="audience" value="{{ form.get('audience','') }}" placeholder="beginner creators, small business owners">
+    {% elif tool.slug in ['keyword-density-checker','word-counter','faq-schema-generator','sitemap-url-builder','hashtag-generator'] %}
+      <label>{{ tool.input_label }}</label><textarea name="text" placeholder="{{ tool.input_placeholder }}">{{ form.get('text','') }}</textarea>
+    {% else %}
+      <label>{{ tool.input_label }}</label><input name="text" value="{{ form.get('text','') }}" placeholder="{{ tool.input_placeholder }}">
+    {% endif %}
+    <button type="submit">Generate</button>
+  </form>
+
+  {% if result %}
+  <section class="result">
+    <h2>Result</h2>
+    {% if result.type in ['list','tags','checklist'] %}
+      <ul>{% for item in result.value %}<li>{{ item }}</li>{% endfor %}</ul>
+    {% elif result.type == 'metrics' %}
+      <div class="metrics">{% for k, v in result.value.items() %}<div><strong>{{ v }}</strong><span>{{ k }}</span></div>{% endfor %}</div>
+    {% elif result.type == 'table' %}
+      <table><tr><th>Word</th><th>Count</th><th>Density</th></tr>{% for row in result.value %}<tr><td>{{ row.word }}</td><td>{{ row.count }}</td><td>{{ row.density }}%</td></tr>{% endfor %}</table>
+    {% elif result.type == 'brief' %}
+      <h3>Title ideas</h3><ol>{% for item in result.value.titles %}<li>{{ item }}</li>{% endfor %}</ol>
+      <h3>Meta</h3><pre>{{ result.value.meta }}</pre>
+      <h3>Outline</h3><ol>{% for item in result.value.outline %}<li>{{ item }}</li>{% endfor %}</ol>
+      <h3>FAQ</h3><ul>{% for item in result.value.faqs %}<li>{{ item }}</li>{% endfor %}</ul>
+    {% else %}
+      <pre>{{ result.value }}</pre>
+    {% endif %}
+  </section>
+  {% endif %}
+
+  <section class="content">
+    <h2>Tutorial: How to use {{ tool.name }}</h2>
+    <ol>{% for step in content.tutorial %}<li>{{ step }}</li>{% endfor %}</ol>
+  </section>
+
+  <section class="content">
+    <h2>Example input and output</h2>
+    <h3>Input</h3>
+    <pre>{{ tool.example_input }}</pre>
+    <h3>Output</h3>
+    <pre>{{ tool.example_output }}</pre>
+  </section>
+
+  <section class="content">
+    <h2>FAQ</h2>
+    {% for q, a in content.faq %}
+      <h3>{{ q }}</h3>
+      <p>{{ a }}</p>
+    {% endfor %}
+  </section>
+
+  <section class="content">
+    <h2>Related tools</h2>
+    <div class="grid small-grid">
+      {% for item in related %}
+      <a class="card" href="/tools/{{ item.slug }}"><h3>{{ item.name }}</h3><p>{{ item.summary }}</p></a>
+      {% endfor %}
+    </div>
+  </section>
+</article>
+{% endblock %}

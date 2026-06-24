@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Guides and Workflows - {{ site_name }}{% endblock %}
+{% block content %}
+<h1>Guides and Workflows</h1>
+<p class="lead">Gunakan guide ini sebagai halaman pendukung SEO. Edit dengan pengalaman pribadi, contoh screenshot, dan data hasil uji agar semakin kuat.</p>
+<section class="grid">
+  {% for guide in guides %}
+  <a class="card" href="/guides/{{ guide.slug }}">
+    <h2>{{ guide.title }}</h2>
+    <p>{{ guide.description }}</p>
+    <span class="pill">{{ guide.keyword }}</span>
+  </a>
+  {% endfor %}
+</section>
+{% endblock %}

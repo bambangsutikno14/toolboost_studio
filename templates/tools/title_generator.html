@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}SEO Title Generator - {{ site_name }}{% endblock %}
+{% block meta_description %}Generate SEO title ideas for articles, landing pages, and videos.{% endblock %}
+{% block content %}
+<h1>SEO Title Generator</h1>
+<form method="post" class="tool-form">
+  <label>Keyword / topik</label>
+  <input name="keyword" value="{{ keyword }}" placeholder="example: rain sound for sleep">
+  <button type="submit">Generate</button>
+</form>
+{% if result %}
+<div class="result"><h2>Hasil</h2><ol>{% for item in result %}<li>{{ item }}</li>{% endfor %}</ol></div>
+{% endif %}
+<section class="content"><h2>Tips judul SEO</h2><p>Gunakan keyword utama, manfaat jelas, dan hindari clickbait berlebihan.</p></section>
+{% endblock %}

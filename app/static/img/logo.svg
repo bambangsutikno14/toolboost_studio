@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="180" viewBox="0 0 720 180" role="img" aria-label="ToolBoost Studio logo">
+  <defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#1769ff"/><stop offset="1" stop-color="#00b3a4"/></linearGradient></defs>
+  <rect width="720" height="180" rx="36" fill="#ffffff"/>
+  <rect x="38" y="38" width="104" height="104" rx="26" fill="url(#g)"/>
+  <path d="M72 108 L90 72 L108 108 M81 95 H99" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="122" cy="58" r="9" fill="#fff"/>
+  <text x="168" y="86" font-family="Arial, Helvetica, sans-serif" font-size="44" font-weight="800" fill="#172033">ToolBoost</text>
+  <text x="170" y="126" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="500" fill="#657084">Creator, SEO &amp; Marketing Tools</text>
+</svg>

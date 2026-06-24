@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+{% block title %}{{ tool.name }} - {{ site_name }}{% endblock %}
+{% block meta_description %}{{ tool.desc }}{% endblock %}
+{% block content %}
+<article class="article">
+  <p class="eyebrow">Free Tool</p>
+  <h1>{{ tool.name }}</h1>
+  <p class="lead">{{ tool.desc }}</p>
+  <p><strong>Target user:</strong> {{ tool.intent }} | <strong>Keyword:</strong> {{ tool.keyword }}</p>
+
+  <form method="post" class="tool-form">
+    {% if tool.slug in ["title-generator", "meta-description"] %}
+      <label>Keyword / topic</label><input name="keyword" value="{{ form.get('keyword','') }}" placeholder="example: ASMR rain">
+    {% elif tool.slug == "hashtag-generator" %}
+      <label>Caption / topic</label><textarea name="text" placeholder="example: asmr rain">{{ form.get('text','') }}</textarea>
+    {% elif tool.slug == "word-counter" %}
+      <label>Text</label><textarea name="text" placeholder="Paste your text">{{ form.get('text','') }}</textarea>
+    {% elif tool.slug == "utm-builder" %}
+      <label>URL</label><input name="url" value="{{ form.get('url','') }}" placeholder="https://example.com/page">
+      <label>Source</label><input name="source" value="{{ form.get('source','') }}" placeholder="google">
+      <label>Medium</label><input name="medium" value="{{ form.get('medium','') }}" placeholder="organic">
+      <label>Campaign</label><input name="campaign" value="{{ form.get('campaign','') }}" placeholder="summer_launch">
+      <label>Term optional</label><input name="term" value="{{ form.get('term','') }}">
+      <label>Content optional</label><input name="content" value="{{ form.get('content','') }}">
+    {% elif tool.slug == "keyword-density-checker" %}
+      <label>Content</label><textarea name="text" placeholder="Paste article, landing page copy, or caption">{{ form.get('text','') }}</textarea>
+    {% elif tool.slug == "slug-generator" %}
+      <label>Title</label><input name="text" value="{{ form.get('text','') }}" placeholder="Example: Best Free SEO Tools for Small Business">
+    {% elif tool.slug == "content-brief-generator" %}
+      <label>Topic</label><input name="topic" value="{{ form.get('topic','') }}" placeholder="Example: YouTube title generator">
+      <label>Audience</label><input name="audience" value="{{ form.get('audience','') }}" placeholder="Example: beginner creators">
+    {% elif tool.slug == "youtube-description-generator" %}
+      <label>Video topic</label><input name="topic" value="{{ form.get('topic','') }}" placeholder="Example: how to sleep with rain sound">
+      <label>Keywords optional</label><input name="keywords" value="{{ form.get('keywords','') }}" placeholder="sleep, relaxing, rain sound">
+    {% elif tool.slug == "faq-generator" %}
+      <label>Topic</label><input name="topic" value="{{ form.get('topic','') }}" placeholder="Example: UTM builder">
+      <label>Audience</label><input name="audience" value="{{ form.get('audience','') }}" placeholder="Example: small business owners">
+    {% elif tool.slug == "blog-outline-generator" %}
+      <label>Topic</label><input name="topic" value="{{ form.get('topic','') }}" placeholder="Example: keyword density checker">
+      <label>Search intent</label><input name="intent" value="{{ form.get('intent','') }}" placeholder="informational">
+    {% elif tool.slug == "social-caption-generator" %}
+      <label>Topic</label><input name="topic" value="{{ form.get('topic','') }}" placeholder="Example: free SEO tools">
+      <label>Platform</label><input name="platform" value="{{ form.get('platform','TikTok') }}" placeholder="TikTok">
+    {% elif tool.slug == "adsense-readiness-checklist" %}
+      <label>Site URL</label><input name="site_url" value="{{ form.get('site_url','') }}" placeholder="https://example.com">
+      <label>Number of useful pages</label><input name="pages_count" value="{{ form.get('pages_count','0') }}" type="number">
+      <label><input type="checkbox" name="has_privacy" value="1" {% if form.get('has_privacy') %}checked{% endif %}> Privacy page exists</label>
+      <label><input type="checkbox" name="has_terms" value="1" {% if form.get('has_terms') %}checked{% endif %}> Terms page exists</label>
+      <label><input type="checkbox" name="has_contact" value="1" {% if form.get('has_contact') %}checked{% endif %}> Contact page exists</label>
+      <label><input type="checkbox" name="has_original_content" value="1" {% if form.get('has_original_content') %}checked{% endif %}> Original useful content exists</label>
+    {% elif tool.slug == "faq-schema-generator" %}
+      {% for i in range(1,6) %}<label>Question {{ i }}</label><input name="q{{ i }}" value=""><label>Answer {{ i }}</label><textarea name="a{{ i }}"></textarea>{% endfor %}
+    {% elif tool.slug == "robots-generator" %}
+      <label>Domain</label><input name="domain" value="{{ form.get('domain','https://example.com') }}">
+    {% elif tool.slug == "sitemap-url-builder" %}
+      <label>URLs, one per line</label><textarea name="urls" placeholder="https://example.com/">{{ form.get('urls','') }}</textarea>
+    {% else %}
+      <label>Topic</label><input name="topic" value="{{ form.get('topic','') }}">
+    {% endif %}
+    <button type="submit">Generate</button>
+  </form>
+
+  {% if result %}
+  <div class="result">
+    <h2>{{ result["title"] }}</h2>
+
+    {% if result["type"] == "list" %}
+      <ol>{% for item in result["items"] %}<li>{{ item }}</li>{% endfor %}</ol>
+
+    {% elif result["type"] == "text" %}
+      <p class="copybox">{{ result["text"] }}</p>
+
+    {% elif result["type"] == "code" %}
+      <pre class="copybox"><code>{{ result["text"] }}</code></pre>
+
+    {% elif result["type"] == "dict" %}
+      <ul>{% for k, v in result["data"].items() %}<li><strong>{{ k }}:</strong> {{ v }}</li>{% endfor %}</ul>
+
+    {% elif result["type"] == "table" %}
+      <p>Total counted words: {{ result["data"]["total_words"] }}</p>
+      <table>
+        <tr><th>Word</th><th>Count</th><th>Density</th></tr>
+        {% for row in result["data"]["rows"] %}
+          <tr><td>{{ row["word"] }}</td><td>{{ row["count"] }}</td><td>{{ row["density"] }}%</td></tr>
+        {% endfor %}
+      </table>
+
+    {% elif result["type"] == "brief" %}
+      <h3>Titles</h3><ol>{% for item in result["data"]["titles"] %}<li>{{ item }}</li>{% endfor %}</ol>
+      <h3>Meta</h3><p class="copybox">{{ result["data"]["meta"] }}</p>
+      <h3>Outline</h3><ol>{% for item in result["data"]["outline"] %}<li>{{ item }}</li>{% endfor %}</ol>
+      <h3>FAQ</h3><ul>{% for item in result["data"]["faqs"] %}<li>{{ item }}</li>{% endfor %}</ul>
+
+    {% elif result["type"] == "youtube" %}
+      <pre class="copybox">{{ result["data"]["description"] }}</pre>
+      <p class="copybox">{{ " ".join(result["data"]["hashtags"]) }}</p>
+
+    {% elif result["type"] == "faq" %}
+      {% for item in result["data"] %}<h3>{{ item["q"] }}</h3><p>{{ item["a"] }}</p>{% endfor %}
+
+    {% elif result["type"] == "social" %}
+      <h3>Hook</h3><p class="copybox">{{ result["data"]["hook"] }}</p>
+      <h3>Caption</h3><p class="copybox">{{ result["data"]["caption"] }}</p>
+      <h3>CTA</h3><p class="copybox">{{ result["data"]["cta"] }}</p>
+      <h3>Hashtags</h3><p class="copybox">{{ " ".join(result["data"]["hashtags"]) }}</p>
+
+    {% elif result["type"] == "checklist" %}
+      <p>Score: {{ result["data"]["score"] }}/{{ result["data"]["total"] }}</p>
+      <ul>{% for item in result["data"]["checks"] %}<li>{% if item["ok"] %}OK{% else %}FIX{% endif %} - {{ item["item"] }}</li>{% endfor %}</ul>
+    {% endif %}
+  </div>
+  {% endif %}
+
+  <section class="content">
+    <h2>How to use {{ tool.name }}</h2>
+    {% for paragraph in tool_content.tutorial %}<p>{{ paragraph }}</p>{% endfor %}
+
+    <h2>Example input-output</h2>
+    <div class="example-list">
+    {% for ex in tool_content.examples %}
+      <div class="example-card"><p><strong>Input:</strong> {{ ex.input }}</p><p><strong>Output:</strong> {{ ex.output }}</p></div>
+    {% endfor %}
+    </div>
+
+    <h2>FAQ</h2>
+    {% for item in tool_content.faq %}<h3>{{ item.q }}</h3><p>{{ item.a }}</p>{% endfor %}
+
+    <h2>Related tools and guides</h2>
+    <ul>{% for link in tool_content.internal_links %}<li><a href="{{ link.url }}">{{ link.label }}</a></li>{% endfor %}</ul>
+    <p><a href="/examples">View example screenshots for all tools</a></p>
+  </section>
+</article>
+{% endblock %}

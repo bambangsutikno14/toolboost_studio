@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Contact - {{ site_name }}{% endblock %}
+{% block content %}
+<h1>Contact</h1>
+{% if sent %}<div class="success">Pesan tersimpan. Untuk produksi, sambungkan ke email atau helpdesk.</div>{% endif %}
+<form method="post" class="tool-form">
+  <label>Name</label><input name="name" required>
+  <label>Email</label><input name="email" type="email" required>
+  <label>Message</label><textarea name="message" required></textarea>
+  <button type="submit">Send</button>
+</form>
+{% endblock %}

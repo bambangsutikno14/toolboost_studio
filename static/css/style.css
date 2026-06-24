@@ -1,0 +1,27 @@
+:root { --bg:#f7f8fb; --card:#fff; --text:#172033; --muted:#657084; --line:#e5e8ef; --brand:#1769ff; }
+* { box-sizing: border-box; }
+body { margin:0; font-family:Arial, Helvetica, sans-serif; background:var(--bg); color:var(--text); line-height:1.6; }
+.topbar { background:var(--card); border-bottom:1px solid var(--line); padding:14px 6%; display:flex; justify-content:space-between; gap:16px; align-items:center; position:sticky; top:0; }
+.brand { font-size:20px; font-weight:bold; color:var(--brand); text-decoration:none; }
+nav a { color:var(--text); text-decoration:none; margin-left:12px; }
+.container { max-width:1040px; margin:0 auto; padding:28px 16px; }
+.hero { background:linear-gradient(135deg, #ffffff, #eef4ff); border:1px solid var(--line); border-radius:18px; padding:32px; margin-bottom:24px; }
+.hero h1 { margin-top:0; font-size:38px; line-height:1.15; }
+.note { color:var(--muted); }
+.grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:16px; }
+.card, .content, .tool-form, .result { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:22px; }
+.card { text-decoration:none; color:var(--text); transition:transform .15s ease, box-shadow .15s ease; }
+.card:hover { transform:translateY(-2px); box-shadow:0 10px 26px rgba(20,30,60,.08); }
+.card h2 { margin-top:0; font-size:20px; }
+.card p { color:var(--muted); }
+.content { margin-top:24px; }
+.tool-form { margin-bottom:20px; }
+label { display:block; margin:12px 0 6px; font-weight:bold; }
+input, textarea { width:100%; padding:12px; border:1px solid var(--line); border-radius:10px; font-size:16px; }
+textarea { min-height:160px; }
+button { margin-top:14px; padding:12px 18px; background:var(--brand); color:white; border:0; border-radius:10px; cursor:pointer; font-weight:bold; }
+.copybox { background:#f1f4f9; border-radius:10px; padding:14px; overflow-wrap:anywhere; }
+.ad-placeholder { border:1px dashed #b6bdca; color:#667085; background:#fafafa; border-radius:14px; padding:18px; text-align:center; margin:18px 0; }
+.success { background:#eaf8ee; border:1px solid #b7e0c1; padding:14px; border-radius:10px; margin-bottom:16px; }
+.footer { color:var(--muted); text-align:center; padding:28px 16px; }
+@media (max-width:640px) { .topbar { display:block; } nav { margin-top:10px; } nav a { display:inline-block; margin:0 10px 8px 0; } .hero h1 { font-size:30px; } }

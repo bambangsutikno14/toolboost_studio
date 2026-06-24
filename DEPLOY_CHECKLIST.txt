@@ -1,0 +1,33 @@
+DEPLOY CHECKLIST - TOOLBOOST STUDIO
+
+Before GitHub:
+[ ] .env is NOT committed
+[ ] .env.example exists
+[ ] README.md exists
+[ ] brand_check.bat passes
+[ ] global_check.bat passes
+[ ] pre_deploy_check.bat passes
+
+Before Online:
+[ ] SITE_DOMAIN is changed to real domain or hosting URL
+[ ] CONTACT_EMAIL is active
+[ ] ADMIN_KEY changed
+[ ] SECRET_KEY changed
+[ ] ADSENSE_ENABLED=false until approved
+[ ] /healthz works
+[ ] /sitemap.xml works
+[ ] /robots.txt works
+
+After Online:
+[ ] Submit sitemap to Google Search Console
+[ ] Add Analytics if needed
+[ ] Test mobile view
+[ ] Replace starter screenshots with real product screenshots
+[ ] Improve localized text for top countries
+
+Quality check:
+[ ] tools_quality_check.bat passes
+
+Tool validation:
+[ ] tools_quality_check.bat passes
+[ ] tools_live_check.bat passes while run.bat is running

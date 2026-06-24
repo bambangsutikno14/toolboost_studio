@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Content Factory - {{ site_name }}{% endblock %}
+{% block content %}
+<h1>Content Factory</h1>
+<p class="lead">Generate starter ideas for new tool pages and guide pages. Use this as draft, then edit with real experience, examples, and screenshots.</p>
+<form method="post" class="tool-form">
+  <input type="hidden" name="key" value="{{ key }}">
+  <label>Topic</label>
+  <input name="topic" placeholder="example: YouTube title generator">
+  <label>Audience</label>
+  <input name="audience" placeholder="example: beginner creators">
+  <button type="submit">Generate Content Pack</button>
+</form>
+{% if output %}
+<div class="result">
+  <h2>Titles</h2>
+  <ol>{% for item in output.titles %}<li>{{ item }}</li>{% endfor %}</ol>
+  <h2>Meta</h2><p class="copybox">{{ output.meta }}</p>
+  <h2>Outline</h2><ol>{% for item in output.brief.outline %}<li>{{ item }}</li>{% endfor %}</ol>
+  <h2>FAQ</h2>{% for item in output.faq %}<h3>{{ item.q }}</h3><p>{{ item.a }}</p>{% endfor %}
+  <h2>Hashtags</h2><p class="copybox">{{ " ".join(output.hashtags) }}</p>
+</div>
+{% endif %}
+{% endblock %}

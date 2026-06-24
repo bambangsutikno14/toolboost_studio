@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Tool Examples and Screenshots</h1>
+<p class="lead">These example screenshots show how each tool is expected to work. Replace them with real product screenshots after public testing.</p>
+
+<section class="grid">
+  {% for tool in tools %}
+  <a class="card" href="/tools/{{ tool.slug }}">
+    <img src="{{ url_for('static', filename='img/screenshots/' ~ tool.slug ~ '.svg') }}" alt="{{ tool.name }} example screenshot" class="screenshot-thumb">
+    <h2>{{ tool.name }}</h2>
+    <p>{{ tool.desc }}</p>
+  </a>
+  {% endfor %}
+</section>
+{% endblock %}

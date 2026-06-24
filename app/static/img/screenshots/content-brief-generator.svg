@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-label="Content Brief Generator example screenshot">
+  <rect width="1200" height="720" fill="#f7f8fb"/>
+  <rect x="80" y="60" width="1040" height="600" rx="28" fill="#ffffff" stroke="#e5e8ef"/>
+  <rect x="80" y="60" width="1040" height="84" rx="28" fill="#172033"/>
+  <circle cx="126" cy="102" r="12" fill="#ff5f57"/><circle cx="164" cy="102" r="12" fill="#ffbd2e"/><circle cx="202" cy="102" r="12" fill="#28c840"/>
+  <text x="250" y="111" font-family="Arial, Helvetica, sans-serif" font-size="24" fill="#ffffff">toolboost.studio/tools/content-brief-generator</text>
+  <text x="120" y="210" font-family="Arial, Helvetica, sans-serif" font-size="44" font-weight="800" fill="#172033">Content Brief Generator</text>
+  <text x="120" y="254" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#657084">Example workflow for creators, writers, and marketers.</text>
+  <rect x="120" y="300" width="960" height="86" rx="18" fill="#f1f4f9" stroke="#e5e8ef"/>
+  <text x="150" y="352" font-family="Arial, Helvetica, sans-serif" font-size="24" fill="#172033">Input: content brief generator</text>
+  <rect x="120" y="420" width="960" height="150" rx="18" fill="#eef4ff" stroke="#c8d8ff"/>
+  <text x="150" y="470" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700" fill="#1769ff">Output example</text>
+  <text x="150" y="520" font-family="Arial, Helvetica, sans-serif" font-size="24" fill="#172033">Free Content Brief Generator Tool for Faster Workflows</text>
+  <rect x="150" y="590" width="170" height="42" rx="12" fill="#1769ff"/>
+  <text x="185" y="619" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#ffffff">Generate</text>
+</svg>

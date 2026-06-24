@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<article class="article">
+  <p class="eyebrow">Local automation</p>
+  <h1>Content Factory</h1>
+  <p class="lead">Gunakan halaman ini untuk riset kompetitor secara etis. Scraper hanya mengambil title, meta description, dan heading; tidak menyalin artikel.</p>
+  <form method="post" class="tool-form">
+    <input type="hidden" name="key" value="{{ key }}">
+    <label>Reference URLs, satu per baris</label>
+    <textarea name="urls" placeholder="https://example.com/tool-page"></textarea>
+    <button type="submit">Analyze reference headings</button>
+  </form>
+  {% if saved %}<div class="success">Hasil riset tersimpan di content/research/reference_research.json</div>{% endif %}
+  {% if refs %}
+    <section class="result">
+      <h2>Reference results</h2>
+      {% for ref in refs %}
+        <div class="mini-card">
+          <strong>{{ ref.url }}</strong>
+          {% if ref.ok %}
+            <p>Title: {{ ref.title }}</p>
+            <p>Meta: {{ ref.meta_description }}</p>
+            <ul>{% for h in ref.headings[:8] %}<li>{{ h.tag }}: {{ h.text }}</li>{% endfor %}</ul>
+          {% else %}
+            <p>Error: {{ ref.error }}</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </section>
+  {% endif %}
+  {% if gaps %}
+    <section class="content">
+      <h2>Gap ideas</h2>
+      <ul>{% for item in gaps %}<li>{{ item }}</li>{% endfor %}</ul>
+    </section>
+  {% endif %}
+  <section class="content">
+    <h2>Generated pages</h2>
+    <p>Total guide otomatis: {{ articles|length }}</p>
+    <ul>{% for a in articles[:20] %}<li><a href="/guides/{{ a.slug }}">{{ a.title }}</a></li>{% endfor %}</ul>
+  </section>
+</article>
+{% endblock %}

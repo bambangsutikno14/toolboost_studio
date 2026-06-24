@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<article class="article">
+  <p class="eyebrow">Contact</p>
+  <h1>Contact {{ site_name }}</h1>
+  <p class="lead">Send feedback, report an issue, request a feature, or ask about partnership opportunities.</p>
+
+  {% if contact_email == "your-active-email@example.com" %}
+  <div class="warning">Contact email is not active yet. Open <code>.env</code> and replace <code>CONTACT_EMAIL=your-active-email@example.com</code> with your real active email before going online.</div>
+  {% endif %}
+
+  <p>Email: <a href="mailto:{{ contact_email }}">{{ contact_email }}</a></p>
+
+  {% if sent %}<div class="success">Message saved locally. For production, connect this form to email, database, or helpdesk.</div>{% endif %}
+
+  <form method="post" class="tool-form">
+    <label>Name</label><input name="name" required>
+    <label>Email</label><input name="email" type="email" required>
+    <label>Message</label><textarea name="message" required placeholder="Tell us what you need help with."></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+</article>
+{% endblock %}

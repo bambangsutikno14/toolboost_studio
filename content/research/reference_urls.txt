@@ -1,0 +1,1 @@
+# Masukkan URL referensi legal, satu per baris. Scraper hanya ambil title/meta/heading.

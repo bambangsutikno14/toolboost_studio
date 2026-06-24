@@ -1,0 +1,25 @@
+# secrets
+.env
+*.env
+
+# python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# local runtime
+logs/
+output/
+data/contact_messages.jsonl
+instance/
+
+# backups can be large/local
+backups/
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

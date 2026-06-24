@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}Content Brief Generator - {{ site_name }}{% endblock %}
+{% block content %}
+<h1>Content Brief Generator</h1>
+<form method="post" class="tool-form"><label>Topic</label><input name="topic" value="{{ topic }}" placeholder="Example: YouTube title generator"><label>Audience</label><input name="audience" value="{{ audience }}" placeholder="Example: beginner creators"><button type="submit">Generate Brief</button></form>
+{% if result %}<div class="result"><h2>Title ideas</h2><ol>{% for item in result.titles %}<li>{{ item }}</li>{% endfor %}</ol><h2>Meta description</h2><p class="copybox">{{ result.meta }}</p><h2>Outline</h2><ol>{% for item in result.outline %}<li>{{ item }}</li>{% endfor %}</ol><h2>FAQ</h2><ul>{% for item in result.faqs %}<li>{{ item }}</li>{% endfor %}</ul></div>{% endif %}
+<section class="content"><h2>Why briefs matter</h2><p>A brief keeps content focused on user intent.</p></section>
+{% endblock %}

@@ -1,0 +1,63 @@
+ADSENSE_SAAS_AUTO - SCALE UP & UPGRADE PLAN
+
+Project ini sekarang full consolidated patch:
+- Bukan hotfix kecil.
+- Bisa membuat project dari nol.
+- Bisa upgrade project lama tanpa hapus data.
+- Membuat backup sebelum overwrite file utama.
+
+JAWABAN LANGSUNG:
+Project bisa digunakan setelah online jika:
+1. Domain sudah terpasang.
+2. Hosting/VPS sudah menjalankan Flask via WSGI server.
+3. .env sudah diisi SITE_DOMAIN domain asli.
+4. Halaman privacy, terms, contact, robots.txt, sitemap.xml, dan healthz bisa dibuka.
+5. Konten tool sudah diedit agar original dan tidak tipis.
+6. AdSense belum otomatis menghasilkan uang sampai situs disetujui dan ada trafik valid.
+
+STRUKTUR UPGRADEABLE:
+- app/app.py             : route utama
+- app/growth.py          : logic tool dan data konten
+- app/scale.py           : security header, proxy fix, health check
+- app/templates/         : tampilan
+- app/static/            : CSS
+- scripts/               : automasi konten, audit, deployment helper
+- content/generated/     : output generator konten
+- deploy/                : file deployment
+- requirements-prod.txt  : dependency production Linux/VPS
+- wsgi.py                : entrypoint production
+
+CARA SCALE UP:
+LEVEL 1 - Localhost
+- Jalankan run.bat.
+- Cocok untuk development.
+
+LEVEL 2 - VPS kecil
+- Gunakan Nginx reverse proxy + Gunicorn/Waitress.
+- Aktifkan SSL.
+- Submit sitemap ke Search Console.
+
+LEVEL 3 - Trafik mulai naik
+- Pisahkan static asset dengan CDN/Cloudflare.
+- Tambahkan cache.
+- Tambahkan database untuk user, history, lead magnet.
+- Tambahkan logging error.
+- Tambahkan backup otomatis.
+
+LEVEL 4 - Monetisasi agresif tapi legal
+- AdSense setelah disetujui.
+- Affiliate produk relevan.
+- Sponsor slot.
+- Premium tool:
+  1. Batch generator
+  2. Export CSV/PDF
+  3. Save history
+  4. Project workspace
+  5. API access
+
+LARANGAN:
+- Jangan bot traffic.
+- Jangan auto-click iklan.
+- Jangan paid-to-click.
+- Jangan copy-paste artikel kompetitor.
+- Jangan membuat iklan terlihat seperti tombol tool.

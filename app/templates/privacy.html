@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<article class="article">
+  <p class="eyebrow">Policy</p>
+  <h1>Privacy Policy</h1>
+  <p class="lead">This Privacy Policy explains how {{ site_name }} handles information when you use our website and tools.</p>
+
+  <h2>Information we collect</h2>
+  <p>We may collect information that you submit through our contact form, such as your name, email address, and message. We may also collect basic technical information such as browser type, device information, referring pages, pages visited, and general usage activity to improve the website.</p>
+
+  <h2>Tool inputs</h2>
+  <p>Most tools are designed for quick browser-based workflows. Do not enter sensitive personal information, passwords, private financial details, or confidential business information into any tool. Tool inputs may be processed to generate outputs and improve the user experience.</p>
+
+  <h2>Analytics</h2>
+  <p>We may use analytics tools to understand which pages and tools are useful, identify errors, and improve performance. Analytics data is typically aggregated and does not directly identify individual users.</p>
+
+  <h2>Advertising</h2>
+  <p>If advertising is enabled, third-party advertising partners may use cookies or similar technologies to serve and measure ads. Advertising will only be activated after the website is configured for the appropriate advertising program.</p>
+
+  <h2>Cookies</h2>
+  <p>Cookies may be used for analytics, security, preferences, or advertising. You can control cookies through your browser settings.</p>
+
+  <h2>How we use information</h2>
+  <p>We use information to operate the website, respond to messages, improve tools, monitor performance, protect against abuse, and understand which content is useful to visitors.</p>
+
+  <h2>Data sharing</h2>
+  <p>We do not sell personal information. We may share limited data with service providers that help operate hosting, analytics, security, or advertising features.</p>
+
+  <h2>Contact</h2>
+  <p>For privacy questions, contact us at <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>.</p>
+
+  <p class="note">Last updated: {{ year }}. This starter policy should be reviewed before public launch and adjusted to your actual hosting, analytics, advertising, and legal requirements.</p>
+</article>
+{% endblock %}

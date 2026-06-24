@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}{{ site_name }} - Free SaaS Tools{% endblock %}
+{% block content %}
+<section class="hero">
+  <h1>Free SaaS Tools for Creators and Marketers</h1>
+  <p>Gunakan tool sederhana ini untuk membuat judul SEO, meta description, hashtag, UTM link, dan menghitung kata.</p>
+  <p class="note">Model bisnis: bantu user dulu, bangun trafik organik, baru monetisasi dengan AdSense/sponsor/premium.</p>
+</section>
+<section class="grid">
+  {% for tool in tools %}
+  <a class="card" href="{{ tool.url }}">
+    <h2>{{ tool.name }}</h2>
+    <p>{{ tool.desc }}</p>
+  </a>
+  {% endfor %}
+</section>
+<section class="content">
+  <h2>Kenapa tool ini bisa jadi aset AdSense?</h2>
+  <p>Halaman tool yang bermanfaat bisa mendapat pencarian berulang. Tambahkan tutorial orisinal, contoh penggunaan, studi kasus, dan FAQ agar tidak terlihat sebagai halaman tipis.</p>
+</section>
+{% endblock %}

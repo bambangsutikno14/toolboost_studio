@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<article class="article">
+  <p class="eyebrow">About</p>
+  <h1>About {{ brand.name }}</h1>
+  <p class="lead">{{ brand.positioning }}</p>
+
+  <h2>What we build</h2>
+  <p>{{ brand.name }} provides simple browser-based tools for creators, writers, marketers, founders, and small businesses. The goal is to help users finish practical tasks faster: writing titles, creating descriptions, checking keyword repetition, building campaign links, planning content briefs, and preparing technical SEO assets.</p>
+
+  <h2>Why this site exists</h2>
+  <p>Many productivity tools are powerful but complicated. {{ brand.short }} focuses on fast workflows: open a tool, enter a clear input, get a useful draft, then edit it for your audience and brand.</p>
+
+  <h2>Our editorial standard</h2>
+  <p>Tool outputs are meant to be starting points, not final truth. We encourage users to review every generated result, add real experience, and avoid misleading claims. Our guides are built around practical examples, clear workflows, and transparent limitations.</p>
+
+  <h2>Core tools</h2>
+  <div class="grid small-grid">
+    {% for tool in tools %}
+    <a class="card" href="/tools/{{ tool.slug }}"><h3>{{ tool.name }}</h3><p>{{ tool.desc }}</p></a>
+    {% endfor %}
+  </div>
+
+  <h2>Contact</h2>
+  <p>For feedback, corrections, or partnership questions, contact us at <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>.</p>
+</article>
+{% endblock %}

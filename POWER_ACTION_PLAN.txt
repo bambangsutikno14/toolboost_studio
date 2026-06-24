@@ -1,0 +1,63 @@
+ADSENSE_SAAS_AUTO POWER PATCH - WORKFLOW PROFESIONAL
+
+1. BATAS AMAN
+- Scraper hanya untuk riset: title, meta description, H1/H2/H3.
+- Jangan copy artikel kompetitor.
+- Jangan auto-publish ribuan halaman tipis.
+- Review dan edit konten sebelum domain publik.
+
+2. CONTENT FACTORY
+Buka:
+http://127.0.0.1:8000/admin/content-factory?key=local-secret
+
+Masukkan URL referensi yang Anda izinkan untuk dianalisis.
+Output disimpan di:
+content/research/reference_research.json
+
+3. GENERATE DATA KONTEN
+Jalankan:
+cd /d E:\\ads\\ADSENSE_SAAS_AUTO
+generate_content.bat
+
+Output:
+content/generated/tools.json
+content/generated/articles.json
+content/generated/content_calendar.csv
+
+4. CEK WEBSITE
+Jalankan server:
+run.bat
+
+Di CMD lain:
+run_audit.bat
+
+5. HALAMAN PENTING
+/tools/title-generator
+/tools/meta-description
+/tools/hashtag-generator
+/tools/word-counter
+/tools/utm-builder
+/tools/keyword-density-checker
+/tools/slug-generator
+/tools/content-brief-generator
+/tools/youtube-description-generator
+/tools/faq-generator
+/tools/blog-outline-generator
+/tools/social-caption-generator
+/tools/adsense-checklist-generator
+/tools/faq-schema-generator
+/tools/robots-txt-generator
+/tools/sitemap-url-builder
+/guides
+/sitemap.xml
+/robots.txt
+/ads.txt
+
+6. AGAR BERSAING
+- Pilih 1 niche utama, jangan terlalu umum.
+- Perkuat 5 tool terbaik dulu.
+- Tambah contoh nyata dan screenshot.
+- Tambah halaman per keyword long-tail.
+- Submit sitemap ke Search Console setelah online.
+- Cari user dari komunitas, YouTube Shorts, TikTok, Threads, LinkedIn.
+- Jangan pakai bot traffic atau auto-click iklan.

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<article class="article">
+  <p class="eyebrow">Terms</p>
+  <h1>Terms of Service</h1>
+  <p class="lead">These Terms explain the basic rules for using {{ site_name }} and its browser-based tools.</p>
+
+  <h2>Use of the tools</h2>
+  <p>{{ site_name }} provides free starter tools for content planning, SEO workflows, social media drafting, campaign tracking, and website utilities. Outputs are provided as drafts and should be reviewed before use.</p>
+
+  <h2>No professional guarantee</h2>
+  <p>The tools do not provide legal, financial, tax, medical, or professional advice. You are responsible for reviewing outputs and deciding whether they are suitable for your use case.</p>
+
+  <h2>Acceptable use</h2>
+  <p>You agree not to abuse the website, attack the service, overload the server, attempt unauthorized access, submit harmful content, or use the tools for unlawful activity.</p>
+
+  <h2>Generated outputs</h2>
+  <p>You may use generated outputs for your own projects, but you are responsible for checking accuracy, originality, compliance, and suitability. Avoid publishing misleading claims or content that violates third-party rights.</p>
+
+  <h2>Advertising and monetization</h2>
+  <p>If ads or sponsored placements appear on the site, they must not be manipulated. Users must not be encouraged to click ads artificially, and automated traffic or invalid activity is not allowed.</p>
+
+  <h2>Service changes</h2>
+  <p>We may update, remove, or change tools and pages to improve quality, security, or performance.</p>
+
+  <h2>Contact</h2>
+  <p>For questions about these Terms, contact <a href="mailto:{{ contact_email }}">{{ contact_email }}</a>.</p>
+
+  <p class="note">Last updated: {{ year }}. This starter terms page should be reviewed before public launch and adjusted for your actual business model and jurisdiction.</p>
+</article>
+{% endblock %}

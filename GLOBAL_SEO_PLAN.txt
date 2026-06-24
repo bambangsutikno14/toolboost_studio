@@ -1,0 +1,43 @@
+GLOBAL SEO PLAN - TOOLBOOST STUDIO
+
+STATUS:
+Brand check sudah bersih. Global SEO pack menambah:
+[OK] Multi-language landing pages: /en, /id, /es, /pt, /fr, /de, /hi, /ar
+[OK] Localized tool URL pattern: /<lang>/tools/<slug>
+[OK] Hreflang links + x-default
+[OK] Sitemap berisi versi bahasa
+[OK] Language selector
+[OK] RTL support dasar untuk Arabic
+[OK] Target market list di .env
+
+STRATEGI PASAR BESAR:
+1. English = global utama, US/UK/CA/AU.
+2. Spanish = Mexico, Spain, Latin America.
+3. Portuguese = Brazil dan Portugal.
+4. Indonesian = Indonesia dan Asia Tenggara.
+5. French = France, Canada, Africa francophone.
+6. German = Germany, Austria, Switzerland.
+7. Hindi = India.
+8. Arabic = Middle East dan North Africa.
+
+ATURAN KUALITAS:
+- Jangan publish ribuan halaman otomatis tanpa review.
+- Mulai index semua halaman yang memang punya tool aktif.
+- Perkuat dulu 8 tool utama: title, meta, hashtag, word counter, UTM, keyword density, slug, content brief.
+- Untuk setiap bahasa, edit 3 contoh sesuai negara target.
+- Tambah screenshot asli setelah online.
+- Pantau Search Console per query dan negara.
+
+URL CEK:
+http://127.0.0.1:8000/en/
+http://127.0.0.1:8000/id/
+http://127.0.0.1:8000/es/
+http://127.0.0.1:8000/pt/
+http://127.0.0.1:8000/fr/
+http://127.0.0.1:8000/de/
+http://127.0.0.1:8000/hi/
+http://127.0.0.1:8000/ar/
+
+AUDIT:
+brand_check.bat
+global_check.bat

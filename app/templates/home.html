@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}{{ page_title }}{% endblock %}
+{% block content %}
+<section class="hero">
+  <p class="eyebrow">{{ brand.tagline }}</p>
+  <h1>Simple tools for creators, SEO writers, and marketers</h1>
+  <p>{{ brand.positioning }}</p>
+  <p class="note">Use practical browser tools to plan titles, descriptions, hashtags, UTM links, content briefs, schema, and SEO checks without opening a complicated dashboard.</p>
+  <div class="hero-actions">
+    <a class="button-link" href="/tools/title-generator">Start with Title Generator</a>
+    <a class="button-link secondary" href="/examples">View Examples</a>
+  </div>
+</section>
+
+<section class="trust-strip">
+  <div><strong>16</strong><span>browser tools</span></div>
+  <div><strong>Free</strong><span>starter access</span></div>
+  <div><strong>Fast</strong><span>no login required</span></div>
+  <div><strong>Useful</strong><span>examples + FAQ</span></div>
+</section>
+
+<section class="section-title"><h2>Tools</h2><p>Each tool has tutorial text, input-output examples, FAQ, and related workflows.</p></section>
+<section class="grid">
+  {% for tool in tools %}
+  <a class="card" href="/tools/{{ tool.slug }}"><h2>{{ tool.name }}</h2><p>{{ tool.desc }}</p><span class="pill">{{ tool.intent }}</span></a>
+  {% endfor %}
+</section>
+
+<section class="section-title"><h2>Guides</h2><p>Guides explain how to use the tools in real creator, SEO, and marketing workflows.</p></section>
+<section class="grid">
+  {% for guide in guides %}
+  <a class="card" href="/guides/{{ guide.slug }}"><h2>{{ guide.title }}</h2><p>{{ guide.description }}</p><span class="pill">{{ guide.keyword }}</span></a>
+  {% endfor %}
+</section>
+{% endblock %}

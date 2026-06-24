@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}{{ guide.title }} - {{ site_name }}{% endblock %}
+{% block meta_description %}{{ guide.description }}{% endblock %}
+{% block content %}
+<article class="article">
+  <p class="eyebrow">Guide</p>
+  <h1>{{ guide.title }}</h1>
+  <p class="lead">{{ guide.description }}</p>
+  <p><strong>Target keyword:</strong> {{ guide.keyword }} | <strong>Audience:</strong> {{ guide.audience }}</p>
+
+  <h2>Practical workflow</h2>
+  {% for section in guide.sections %}
+    <p>{{ section }}</p>
+  {% endfor %}
+
+  <h2>Recommended tools</h2>
+  <div class="grid small-grid">
+    {% for tool in related_tools %}
+    <a class="card" href="/tools/{{ tool.slug }}">
+      <h3>{{ tool.name }}</h3>
+      <p>{{ tool.desc }}</p>
+    </a>
+    {% endfor %}
+  </div>
+
+  <h2>FAQ</h2>
+  {% for q, a in guide.faq %}
+    <h3>{{ q }}</h3>
+    <p>{{ a }}</p>
+  {% endfor %}
+</article>
+{% endblock %}

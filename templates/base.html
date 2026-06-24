@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}{{ site_name }}{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{% block meta_description %}Free browser-based SaaS tools for creators, marketers, and small businesses.{% endblock %}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  {{ adsense_script()|safe }}
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/">{{ site_name }}</a>
+  <nav>
+    <a href="/">Tools</a>
+    <a href="/privacy">Privacy</a>
+    <a href="/terms">Terms</a>
+    <a href="/contact">Contact</a>
+  </nav>
+</header>
+<main class="container">
+  {{ ad_block("top")|safe }}
+  {% block content %}{% endblock %}
+  {{ ad_block("bottom")|safe }}
+</main>
+<footer class="footer">
+  <p>Copyright {{ year }} {{ site_name }}. Built for useful tools, original content, and organic traffic.</p>
+</footer>
+</body>
+</html>
