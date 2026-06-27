@@ -19,7 +19,7 @@ TESTS = [
     ("/tools/slug-generator", {"text": "Best Free SEO Tools!"}, ["best-free-seo-tools"]),
     ("/tools/content-brief-generator", {"topic": "youtube title generator", "audience": "creators"}, ["Content Brief", "Outline"]),
     ("/tools/youtube-description-generator", {"topic": "asmr rain", "keywords": "sleep relaxing"}, ["YouTube Description", "Key points"]),
-    ("/tools/faq-generator", {"topic": "UTM builder", "audience": "marketers"}, ["FAQ Ideas", "What is UTM builder"]),
+    ("/tools/faq-generator", {"topic": "UTM builder", "audience": "marketers"}, ["FAQ Ideas", "What is UTM Builder"]),
     ("/tools/blog-outline-generator", {"topic": "keyword density checker", "intent": "informational"}, ["Blog Outline", "H1:"]),
     ("/tools/social-caption-generator", {"topic": "free SEO tools", "platform": "TikTok"}, ["Social Caption", "Hook"]),
     ("/tools/adsense-readiness-checklist", {"site_url": "https://example.com", "pages_count": "20", "has_privacy": "1", "has_terms": "1", "has_contact": "1", "has_original_content": "1"}, ["AdSense Readiness", "Score"]),
@@ -43,10 +43,14 @@ for path, data, expected in TESTS:
         if "Internal Server Error" in body or "Traceback" in body:
             print(f"[FAIL] {url} returned server error text")
             sys.exit(1)
-        missing = [x for x in expected if x not in body]
+
+        body_norm = body.lower()
+        missing = [x for x in expected if x.lower() not in body_norm]
         if missing:
             print(f"[FAIL] {url} missing {missing}")
+            print("Debug tip: buka URL tool tersebut di browser dan cek apakah output tampil, lalu kirim screenshot/error.")
             sys.exit(1)
+
         print(f"[OK] {url}")
         ok += 1
     except Exception as e:

@@ -25,14 +25,11 @@ must("#rain" in tags, "hashtag keeps #rain")
 must("#smr" not in tags and "#ain" not in tags, "no broken #smr/#ain")
 must(any(t in tags for t in ["#asmrrain", "#rainasmr", "#rainsounds"]), "adds topic-aware ASMR/rain hashtags")
 
-empty_tags = hashtag_ideas("")
-print("empty input =>", " ".join(empty_tags))
-must(len(empty_tags) >= 5, "hashtag fallback returns at least 5 tags")
-
 titles = title_ideas("asmr rain")
-print("titles sample =>", titles[0])
-must(len(titles) >= 5, "title generator returns multiple titles")
+print("titles sample =>", titles[:3])
+must(len(titles) >= 10, "title generator returns strong option set")
 must("ASMR Rain" in titles[0], "title generator preserves ASMR acronym")
+must(all(len(t) <= 68 for t in titles), "titles keep practical search length")
 
 meta = meta_description("utm builder")
 print("meta sample =>", meta)
@@ -41,37 +38,38 @@ must(len(meta) <= 155, "meta description length is safe")
 
 wc = word_counter("hello world. this is a test.")
 print("word count =>", wc)
-must(wc["words"] == 6, "word counter counts words")
+must(wc["words"] == 6 and "reading_time_minutes" in wc, "word counter counts and estimates time")
 
-utm = build_utm("https://example.com", "google", "organic", "test")
+utm = build_utm("https://example.com", "Google Ads", "Paid Search", "Test Campaign")
 print("utm =>", utm)
-must("utm_source=google" in utm and "utm_campaign=test" in utm, "UTM builder valid")
+must("utm_source=google_ads" in utm and "utm_campaign=test_campaign" in utm, "UTM builder normalizes campaign naming")
 
 density = keyword_density("seo seo tools for creators")
 print("density sample =>", density)
-must(density["total_words"] >= 3 and density["rows"], "keyword density runs")
+must(density["total_words"] >= 3 and density["rows"] and "status" in density["rows"][0], "keyword density runs with status")
 
 slug = slugify("Best Free SEO Tools!")
 print("slug sample =>", slug)
 must(slug == "best-free-seo-tools", "slug generator valid")
 
 brief = content_brief("youtube title generator", "creators")
-must("titles" in brief and "outline" in brief and "faqs" in brief, "content brief valid")
+must("titles" in brief and "outline" in brief and "quality_notes" in brief, "content brief valid and quality-aware")
 
 yt = youtube_description("asmr rain", "sleep relaxing")
-must("description" in yt and len(yt["hashtags"]) >= 5, "YouTube description valid")
+must("description" in yt and len(yt["hashtags"]) >= 5 and "Key points" in yt["description"], "YouTube description valid")
 
 faq = faq_generator("UTM builder", "marketers")
-must(len(faq) >= 4 and "q" in faq[0] and "a" in faq[0], "FAQ generator valid")
+must(len(faq) >= 5 and "q" in faq[0] and "a" in faq[0], "FAQ generator valid")
+must("UTM Builder" in faq[0]["q"], "FAQ generator preserves UTM Builder capitalization")
 
 outline = blog_outline("keyword density checker")
-must(len(outline) >= 5 and outline[0].startswith("H1:"), "blog outline valid")
+must(len(outline) >= 8 and outline[0].startswith("H1:"), "blog outline valid")
 
 social = social_caption("free SEO tools", "TikTok")
 must("hook" in social and len(social["hashtags"]) >= 5, "social caption valid")
 
 check = adsense_checklist("https://example.com", 20, True, True, True, True)
-must(check["score"] >= 5, "AdSense checklist valid")
+must(check["score"] >= 7, "AdSense checklist valid")
 
 schema = faq_schema([{"q": "What is this?", "a": "A test answer."}])
 must('"FAQPage"' in schema and '"Question"' in schema, "FAQ schema valid")

@@ -73,3 +73,7 @@ Run live validation while server is running:
 ```bat
 tools_live_check.bat
 ```
+
+### V6 audit note
+
+`tools_live_check.bat` uses case-insensitive output checks so valid title casing such as `UTM Builder` does not fail because of lowercase expectation.

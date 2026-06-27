@@ -5,7 +5,7 @@
 <article class="article">
   <p class="eyebrow">Free Tool</p>
   <h1>{{ tool.name }}</h1>
-  <p class="lead">{{ tool.desc }}</p>
+  <p class="lead">{{ tool.desc }}</p><div class="tool-quality-bar"><span>Fast draft</span><span>Editable output</span><span>Examples</span><span>FAQ</span><span>Related tools</span></div>
   <p><strong>Target user:</strong> {{ tool.intent }} | <strong>Keyword:</strong> {{ tool.keyword }}</p>
 
   <form method="post" class="tool-form">
@@ -57,11 +57,11 @@
     {% else %}
       <label>Topic</label><input name="topic" value="{{ form.get('topic','') }}">
     {% endif %}
-    <button type="submit">Generate</button>
+    <button type="submit">Generate useful output</button>
   </form>
 
   {% if result %}
-  <div class="result">
+  <div class="result result-pro">
     <h2>{{ result["title"] }}</h2>
 
     {% if result["type"] == "list" %}
