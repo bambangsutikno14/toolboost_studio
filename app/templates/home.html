@@ -1,41 +1,50 @@
 {% extends "base.html" %}
 {% block title %}{{ page_title }}{% endblock %}
 {% block content %}
-<section class="hero">
-  <p class="eyebrow">{{ brand.tagline }}</p>
-  <h1>Simple tools for creators, SEO writers, and marketers</h1>
-  <p>{{ brand.positioning }}</p>
-  <p class="note">Built for organic discovery: practical tools, editable outputs, examples, FAQ, internal links, and multilingual landing pages. Start with one task, get a useful draft, then improve it with your own context.</p>
+<section class="hero creator-hero">
+  <p class="eyebrow">ToolBoost Creator Studio • V7</p>
+  <h1>Tools konten satset untuk kreator pemula</h1>
+  <p>Buat ide, script, title, caption, hashtag, thumbnail text, upload checklist, dan kalender konten dari satu tempat. Ringan, cepat, mobile-friendly, dan dibuat untuk menghemat waktu, biaya, dan pikiran.</p>
+  <p class="note">Fokus baru: membantu kreator pemula memproduksi konten lebih konsisten tanpa harus memakai tools mahal atau workflow yang ribet.</p>
   <div class="hero-actions">
-    <a class="button-link" href="/tools/title-generator">Start with Title Generator</a>
-    <a class="button-link secondary" href="/examples">View Examples</a>
+    <a class="button-link" href="/tools/creator-content-pack">Generate Content Pack</a>
+    <a class="button-link secondary" href="/tools/content-calendar-generator">Plan 7 Days</a>
   </div>
 </section>
 
-<section class="organic-panel">
+<section class="creator-workflow">
   <div>
-    <p class="eyebrow">Quality-first tool engine</p>
-    <h2>Useful outputs first, SEO second</h2>
-    <p>ToolBoost focuses on practical outputs that users can actually edit and use. Pages are structured for search engines, but the main value is the tool result, examples, FAQ, and clear next steps.</p>
+    <p class="eyebrow">Creator workflow</p>
+    <h2>Dari ide sampai siap upload</h2>
+    <p>ToolBoost tidak hanya membuat teks satuan. V7 menggabungkan beberapa kebutuhan kreator menjadi workflow yang langsung bisa dipakai dari HP.</p>
   </div>
-  <div class="mini-checks">
-    <span>✓ Topic-aware generators</span>
-    <span>✓ Clean URL and UTM utilities</span>
-    <span>✓ FAQ and schema helpers</span>
-    <span>✓ Global language landing pages</span>
+  <div class="workflow-grid">
+    <span>1. Plan idea</span>
+    <span>2. Write script</span>
+    <span>3. Package title</span>
+    <span>4. Make thumbnail text</span>
+    <span>5. Add caption & hashtags</span>
+    <span>6. Upload with checklist</span>
   </div>
 </section>
 
 <section class="trust-strip">
-  <div><strong>16</strong><span>browser tools</span></div>
-  <div><strong>Free</strong><span>starter access</span></div>
+  <div><strong>{{ tools|length }}</strong><span>browser tools</span></div>
+  <div><strong>5</strong><span>creator-first tools</span></div>
+  <div><strong>Mobile</strong><span>easy from phone</span></div>
   <div><strong>Fast</strong><span>no login required</span></div>
-  <div><strong>Useful</strong><span>examples + FAQ</span></div>
 </section>
 
-<section class="section-title"><h2>Tools</h2><p>Each tool has tutorial text, input-output examples, FAQ, and related workflows.</p></section>
+<section class="section-title"><h2>Featured Creator Tools</h2><p>Mulai dari tools yang paling membantu kreator pemula membuat konten lebih cepat.</p></section>
+<section class="grid featured-grid">
+  {% for tool in tools[:5] %}
+  <a class="card featured-card" href="/tools/{{ tool.slug }}"><span class="feature-badge">Creator Tool</span><h2>{{ tool.name }}</h2><p>{{ tool.desc }}</p><span class="pill">{{ tool.intent }}</span></a>
+  {% endfor %}
+</section>
+
+<section class="section-title"><h2>More Free Tools</h2><p>Tools pendukung untuk SEO, caption, campaign tracking, schema, dan website readiness.</p></section>
 <section class="grid">
-  {% for tool in tools %}
+  {% for tool in tools[5:] %}
   <a class="card" href="/tools/{{ tool.slug }}"><h2>{{ tool.name }}</h2><p>{{ tool.desc }}</p><span class="pill">{{ tool.intent }}</span></a>
   {% endfor %}
 </section>

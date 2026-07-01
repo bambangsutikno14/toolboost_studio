@@ -1,7 +1,7 @@
 import sys
-from pathlib import Path
 import urllib.parse
 import urllib.request
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
@@ -10,6 +10,11 @@ if str(ROOT) not in sys.path:
 BASE = "http://127.0.0.1:8000"
 
 TESTS = [
+    ("/tools/creator-content-pack", {"niche": "asmr rain", "platform": "YouTube Shorts", "audience": "United States viewers", "tone": "relaxing", "goal": "growth"}, ["Creator Content Pack", "Short Script", "Upload Checklist", "#asmr"]),
+    ("/tools/shorts-script-generator", {"topic": "asmr rain", "platform": "YouTube Shorts", "audience": "United States viewers", "tone": "relaxing", "duration": "45"}, ["Shorts Script", "Subtitle Text", "Hashtags"]),
+    ("/tools/thumbnail-text-maker", {"topic": "youtube growth for beginners", "platform": "YouTube Shorts", "emotion": "curiosity"}, ["Thumbnail Text Ideas", "Layout Notes", "Title Pairing"]),
+    ("/tools/content-calendar-generator", {"niche": "asmr rain", "platform": "YouTube Shorts", "days": "7", "audience": "beginner creators", "goal": "growth"}, ["Creator Content Calendar", "Day 1", "Workflow"]),
+    ("/tools/clip-idea-generator", {"niche": "creator workflow", "platform": "YouTube Shorts", "transcript": "First choose one idea. Then write a hook. Next create captions and hashtags. Finally upload and track results."}, ["Clip Ideas", "Editing Notes", "Clip 1"]),
     ("/tools/title-generator", {"keyword": "asmr rain"}, ["Title Ideas", "ASMR Rain"]),
     ("/tools/meta-description", {"keyword": "utm builder"}, ["Meta Description", "UTM Builder"]),
     ("/tools/hashtag-generator", {"text": "asmr rain"}, ["#asmr", "#rain", "#asmrrain"]),
@@ -43,14 +48,12 @@ for path, data, expected in TESTS:
         if "Internal Server Error" in body or "Traceback" in body:
             print(f"[FAIL] {url} returned server error text")
             sys.exit(1)
-
         body_norm = body.lower()
         missing = [x for x in expected if x.lower() not in body_norm]
         if missing:
             print(f"[FAIL] {url} missing {missing}")
-            print("Debug tip: buka URL tool tersebut di browser dan cek apakah output tampil, lalu kirim screenshot/error.")
+            print("Debug tip: buka URL tool tersebut di browser dan cek output.")
             sys.exit(1)
-
         print(f"[OK] {url}")
         ok += 1
     except Exception as e:

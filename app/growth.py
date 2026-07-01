@@ -40,6 +40,11 @@ HASHTAG_CLUSTERS = {
 }
 
 TOOLS = [
+    {"name":"Creator Content Pack Generator","slug":"creator-content-pack","keyword":"creator content pack generator","intent":"generate complete content packs","desc":"Generate titles, hooks, short script, captions, hashtags, thumbnail text, pinned comment, and upload checklist from one idea."},
+    {"name":"Shorts Script Generator","slug":"shorts-script-generator","keyword":"shorts script generator","intent":"write short video scripts","desc":"Create a mobile-friendly short video script with hook, scenes, subtitles, CTA, caption, and hashtags."},
+    {"name":"Thumbnail Text Maker","slug":"thumbnail-text-maker","keyword":"thumbnail text maker","intent":"create thumbnail text ideas","desc":"Generate short thumbnail words, curiosity angles, layout notes, and emotional text variants for beginner creators."},
+    {"name":"Content Calendar Generator","slug":"content-calendar-generator","keyword":"content calendar generator","intent":"plan consistent uploads","desc":"Create a 7-day or 30-day creator content calendar with topic angle, title, caption, CTA, and hashtags."},
+    {"name":"Clip Idea Generator","slug":"clip-idea-generator","keyword":"clip idea generator","intent":"find short clip ideas","desc":"Turn a transcript or rough notes into clip ideas, hooks, titles, captions, and timestamp-style sections."},
     {"name":"SEO Title Generator","slug":"title-generator","keyword":"seo title generator","intent":"create click-worthy search titles","desc":"Generate clear title ideas with search intent, benefit, and length awareness."},
     {"name":"Meta Description Generator","slug":"meta-description","keyword":"meta description generator","intent":"write search snippets","desc":"Create concise meta descriptions for pages, tools, posts, and landing pages."},
     {"name":"Hashtag Generator","slug":"hashtag-generator","keyword":"hashtag generator","intent":"create relevant social tags","desc":"Generate topic-aware hashtags from captions, keywords, and content ideas."},
@@ -58,7 +63,19 @@ TOOLS = [
     {"name":"Sitemap URL Builder","slug":"sitemap-url-builder","keyword":"sitemap url builder","intent":"build XML sitemap","desc":"Convert a list of URLs into a basic XML sitemap."},
 ]
 
+CREATOR_TOOL_SLUGS = [
+    "creator-content-pack",
+    "shorts-script-generator",
+    "thumbnail-text-maker",
+    "content-calendar-generator",
+    "clip-idea-generator",
+]
+
 GUIDES = [
+    {"title":"Creator Content Toolkit: Faster Workflow for Beginners","slug":"creator-content-toolkit-workflow","keyword":"creator content toolkit","description":"A practical workflow for turning one idea into titles, scripts, captions, hashtags, thumbnail text, and an upload checklist."},
+    {"title":"How Beginner Creators Can Plan 7 Days of Content","slug":"beginner-creator-content-calendar","keyword":"content calendar for creators","description":"Use a simple content calendar to reduce decision fatigue and upload more consistently."},
+    {"title":"Shorts Script Formula for YouTube, TikTok, and Reels","slug":"shorts-script-formula","keyword":"shorts script generator","description":"A fast script structure with hook, value, scene flow, subtitles, and CTA."},
+    {"title":"Thumbnail Text Ideas That Beginners Can Use","slug":"thumbnail-text-ideas","keyword":"thumbnail text maker","description":"How to write short, clear thumbnail text that supports the title without misleading viewers."},
     {"title":"How to Use Free SEO Tools Without Over-Optimizing","slug":"free-seo-tools-without-over-optimizing","keyword":"free seo tools","description":"A practical workflow for using SEO tools while keeping pages helpful for readers."},
     {"title":"YouTube Title Generator: Examples and Workflow","slug":"youtube-title-generator-workflow","keyword":"youtube title generator","description":"How to create clearer video titles for search, browse, and suggested traffic."},
     {"title":"Meta Description Examples for Tool Pages","slug":"meta-description-examples-tool-pages","keyword":"meta description examples","description":"Examples of concise meta descriptions for free tools and SaaS landing pages."},
@@ -386,3 +403,279 @@ def sitemap_xml(urls):
 {body}
 </urlset>
 """
+
+
+# ---------------------------
+# V7 Creator Studio Engine
+# ---------------------------
+
+PLATFORM_PRESETS = {
+    "youtube shorts": {"length": "35-55 seconds", "cta": "Subscribe for more simple creator workflows.", "format": "short vertical video"},
+    "youtube": {"length": "3-8 minutes", "cta": "Subscribe and save this for your next upload.", "format": "video"},
+    "tiktok": {"length": "20-45 seconds", "cta": "Save this and try it for your next post.", "format": "short vertical video"},
+    "instagram reels": {"length": "20-45 seconds", "cta": "Save this reel and follow for more ideas.", "format": "reel"},
+    "reels": {"length": "20-45 seconds", "cta": "Save this reel and follow for more ideas.", "format": "reel"},
+    "blog": {"length": "600-1200 words", "cta": "Bookmark this guide and use the checklist.", "format": "article"},
+}
+
+TONE_PRESETS = {
+    "relaxing": ["calm", "soft", "slow", "comforting", "peaceful"],
+    "viral": ["curious", "fast", "bold", "high-energy", "shareable"],
+    "educational": ["clear", "useful", "step-by-step", "practical", "beginner-friendly"],
+    "professional": ["trusted", "simple", "direct", "polished", "credible"],
+    "funny": ["light", "playful", "unexpected", "casual", "memorable"],
+}
+
+def normalize_choice(value, default="youtube shorts"):
+    value = (value or default).strip().lower()
+    return value
+
+def platform_profile(platform):
+    key = normalize_choice(platform)
+    return PLATFORM_PRESETS.get(key, {"length": "30-60 seconds", "cta": "Save this and try it today.", "format": key or "content"})
+
+def tone_words(tone):
+    return TONE_PRESETS.get(normalize_choice(tone, "educational"), TONE_PRESETS["educational"])
+
+def creator_angles(niche, goal="growth"):
+    topic = smart_title(niche or "creator content")
+    goal = (goal or "growth").strip().lower()
+    base = [
+        f"Beginner mistake in {topic}",
+        f"Fast workflow for {topic}",
+        f"Before vs after using {topic}",
+        f"Simple checklist for {topic}",
+        f"One-minute guide to {topic}",
+        f"Why {topic} feels hard at first",
+        f"How to start {topic} with limited tools",
+        f"Save time with this {topic} process",
+        f"{topic} idea you can try today",
+        f"Common myth about {topic}",
+    ]
+    if "money" in goal or "monet" in goal:
+        base.insert(0, f"How {topic} can support monetization")
+        base.insert(1, f"Low-cost {topic} workflow for beginners")
+    elif "engage" in goal:
+        base.insert(0, f"Question-based {topic} idea to get comments")
+    elif "affiliate" in goal:
+        base.insert(0, f"Soft-sell {topic} content idea for affiliate posts")
+    return base[:10]
+
+def creator_title_pack(niche, platform="", tone="", goal=""):
+    topic = smart_title(niche or "creator content")
+    platform_name = smart_title(platform or "YouTube Shorts")
+    words = tone_words(tone)
+    titles = [
+        f"{topic} Made Simple for Beginners",
+        f"How to Create {topic} Content Faster",
+        f"Stop Overthinking {topic}: Use This Workflow",
+        f"{topic} Ideas You Can Use Today",
+        f"Beginner {topic} Checklist for {platform_name}",
+        f"Make Better {topic} Content With Less Stress",
+        f"One Simple {topic} Workflow That Saves Time",
+        f"From Idea to Upload: {topic} Content Pack",
+        f"{topic} Tips for Creators Who Want to Grow",
+        f"Try This {words[0].capitalize()} {topic} Workflow",
+    ]
+    result = []
+    for item in titles:
+        add_unique(result, item[:72].rstrip(" -:"))
+    return result[:10]
+
+def creator_hooks(niche, platform="", tone="", goal=""):
+    topic = smart_title(niche or "creator content")
+    words = tone_words(tone)
+    hooks = [
+        f"If you are stuck on {topic.lower()}, start with this simple workflow.",
+        f"Here is a faster way to plan {topic.lower()} without overthinking.",
+        f"Most beginners make {topic.lower()} too complicated.",
+        f"Before you upload, check these {topic.lower()} basics.",
+        f"You do not need expensive tools to start {topic.lower()} today.",
+    ]
+    if "viral" in normalize_choice(tone, ""):
+        hooks = [
+            f"This is why your {topic.lower()} content feels slow to make.",
+            f"I wish I knew this {topic.lower()} workflow earlier.",
+            f"Stop scrolling and save this {topic.lower()} shortcut.",
+            f"One small fix can make your {topic.lower()} easier to finish.",
+            f"Use this before you create your next {topic.lower()} post.",
+        ]
+    if "relax" in normalize_choice(tone, ""):
+        hooks = [
+            f"Here is a calm and simple {topic.lower()} idea for your next upload.",
+            f"Use this peaceful workflow when you do not know what to post.",
+            f"Create {topic.lower()} content slowly, clearly, and without stress.",
+            f"This simple {topic.lower()} plan helps you stay consistent.",
+            f"Save this {words[0]} content idea for your next upload.",
+        ]
+    return hooks
+
+def short_script_scenes(topic, platform="", tone="", audience="", duration="45"):
+    topic_title = smart_title(topic or "creator content")
+    profile = platform_profile(platform)
+    audience = (audience or "beginner creators").strip()
+    words = tone_words(tone)
+    return [
+        {"time": "0-3s", "label": "Hook", "line": f"If you are a {audience} stuck on {topic_title.lower()}, use this simple plan."},
+        {"time": "3-10s", "label": "Problem", "line": f"Most people waste time because they try to create the title, script, caption, and hashtags separately."},
+        {"time": "10-25s", "label": "Value", "line": f"Start with one idea, choose one angle, write a short hook, then package it for {smart_title(platform or 'your platform')}."},
+        {"time": "25-40s", "label": "Action", "line": f"Use a checklist: title, thumbnail text, caption, hashtags, and one clear CTA."},
+        {"time": "40-55s", "label": "CTA", "line": profile["cta"]},
+    ]
+
+def shorts_script(topic, platform="YouTube Shorts", duration="45", tone="educational", audience="beginner creators"):
+    topic_title = smart_title(topic or "creator content")
+    profile = platform_profile(platform)
+    scenes = short_script_scenes(topic_title, platform, tone, audience, duration)
+    subtitle_text = [s["line"] for s in scenes]
+    caption = f"Create {topic_title} content faster with a simple {profile['format']} workflow. Save this for your next upload."
+    tags = hashtag_ideas(f"{topic_title} {platform} creator tools content")[:12]
+    return {
+        "topic": topic_title,
+        "platform": smart_title(platform or "YouTube Shorts"),
+        "duration": profile["length"],
+        "scenes": scenes,
+        "subtitle_text": subtitle_text,
+        "caption": caption,
+        "hashtags": tags,
+        "checklist": ["Record vertically", "Keep hook under 3 seconds", "Add readable subtitles", "Use one CTA", "Review sound and pacing before posting"],
+    }
+
+def thumbnail_text_maker(topic, platform="", emotion="curiosity"):
+    topic_title = smart_title(topic or "creator content")
+    emotion = (emotion or "curiosity").strip().lower()
+    variants = [
+        {"style": "Curiosity", "text": f"Try This", "support": f"Use with title about {topic_title}."},
+        {"style": "Problem", "text": f"Stop This", "support": f"Good for mistake/avoidance content."},
+        {"style": "Result", "text": f"Faster Content", "support": f"Good for time-saving workflow content."},
+        {"style": "Beginner", "text": f"Start Here", "support": f"Good for beginner tutorial content."},
+        {"style": "Checklist", "text": f"Upload Ready", "support": f"Good for packaging and publishing content."},
+        {"style": "Calm", "text": f"No Stress", "support": f"Good for simple workflow and relaxing niches."},
+    ]
+    if "money" in emotion or "profit" in emotion:
+        variants.insert(0, {"style": "Monetization", "text": "Make It Pay", "support": "Use carefully; avoid unrealistic income promises."})
+    layout_notes = [
+        "Use 2-4 words maximum on the thumbnail.",
+        "Make text readable on mobile first.",
+        "Do not repeat the exact same words as the title.",
+        "Use contrast, face/object focus, and one clear visual idea.",
+        "Avoid fake claims or misleading before-after promises.",
+    ]
+    return {
+        "topic": topic_title,
+        "variants": variants[:8],
+        "layout_notes": layout_notes,
+        "title_pairing": creator_title_pack(topic_title, platform, emotion)[:5],
+    }
+
+def content_calendar(niche, platform="YouTube Shorts", days="7", audience="beginner creators", goal="growth"):
+    try:
+        n = int(days)
+    except Exception:
+        n = 7
+    n = max(1, min(n, 30))
+    niche_title = smart_title(niche or "creator content")
+    platform_name = smart_title(platform or "YouTube Shorts")
+    angles = creator_angles(niche_title, goal)
+    rows = []
+    for i in range(1, n + 1):
+        angle = angles[(i - 1) % len(angles)]
+        title = creator_title_pack(f"{niche_title} {angle}", platform, "educational", goal)[0]
+        tags = hashtag_ideas(f"{niche_title} {platform} {angle}")[:8]
+        rows.append({
+            "day": i,
+            "angle": angle,
+            "title": title,
+            "hook": creator_hooks(f"{niche_title} {angle}", platform, "educational", goal)[0],
+            "caption": f"Day {i}: {angle}. Save this if you are building {niche_title.lower()} content for {platform_name}.",
+            "cta": "Save this and use it for your next upload.",
+            "hashtags": tags,
+        })
+    return {
+        "niche": niche_title,
+        "platform": platform_name,
+        "days": rows,
+        "workflow": ["Batch 3 ideas at once", "Write hooks first", "Reuse formats that perform", "Track impressions and clicks", "Improve one variable per upload"],
+    }
+
+def creator_content_pack(niche, platform="YouTube Shorts", audience="beginner creators", tone="educational", goal="growth"):
+    niche_title = smart_title(niche or "creator content")
+    platform_name = smart_title(platform or "YouTube Shorts")
+    profile = platform_profile(platform)
+    titles = creator_title_pack(niche_title, platform, tone, goal)
+    hooks = creator_hooks(niche_title, platform, tone, goal)
+    script = shorts_script(niche_title, platform, "45", tone, audience)
+    thumbnail = thumbnail_text_maker(niche_title, platform, tone)
+    tags = hashtag_ideas(f"{niche_title} {platform} {audience} {goal}")[:14]
+    youtube_desc = youtube_description(niche_title, " ".join(tags[:5]))
+    social = social_caption(niche_title, platform_name)
+    pinned_comment = f"What part of {niche_title.lower()} is hardest for you right now: idea, script, caption, or consistency?"
+    checklist = [
+        "Choose one clear angle",
+        "Pick one title and one thumbnail text",
+        "Keep the hook short",
+        "Add captions/subtitles",
+        "Use relevant hashtags only",
+        "Write one CTA",
+        "Check mobile readability",
+        "Publish and track impressions, clicks, and retention",
+    ]
+    next_ideas = creator_angles(niche_title, goal)[:7]
+    return {
+        "niche": niche_title,
+        "platform": platform_name,
+        "audience": audience or "beginner creators",
+        "tone": tone or "educational",
+        "goal": goal or "growth",
+        "format": profile["format"],
+        "titles": titles,
+        "hooks": hooks,
+        "script": script,
+        "youtube_description": youtube_desc["description"],
+        "social_caption": social["caption"],
+        "hashtags": tags,
+        "thumbnail_text": thumbnail["variants"][:6],
+        "pinned_comment": pinned_comment,
+        "upload_checklist": checklist,
+        "next_content_ideas": next_ideas,
+    }
+
+def split_transcript_chunks(text):
+    raw = re.split(r"(?<=[.!?])\s+|\n+", (text or "").strip())
+    chunks = [c.strip() for c in raw if len(c.strip()) > 15]
+    if not chunks:
+        chunks = [c.strip() for c in re.split(r"[,;]+", text or "") if len(c.strip()) > 15]
+    return chunks[:12]
+
+def clip_idea_generator(transcript, platform="YouTube Shorts", niche=""):
+    chunks = split_transcript_chunks(transcript)
+    topic = smart_title(niche or (chunks[0] if chunks else "creator content"))
+    ideas = []
+    if not chunks:
+        chunks = [
+            f"Explain one beginner mistake about {topic}.",
+            f"Show a faster workflow for {topic}.",
+            f"Give a checklist for {topic}.",
+        ]
+    for idx, chunk in enumerate(chunks[:6], start=1):
+        clean = chunk[:130].strip()
+        ideas.append({
+            "clip": idx,
+            "section": f"Clip {idx}",
+            "hook": f"Use this part as a hook: {clean}",
+            "title": creator_title_pack(f"{topic} clip {idx}", platform)[0],
+            "caption": f"Clip idea {idx} for {topic}. Turn this section into a short, clear post and add one CTA.",
+            "hashtags": hashtag_ideas(f"{topic} {platform} clip idea")[:8],
+        })
+    return {
+        "topic": topic,
+        "platform": smart_title(platform or "YouTube Shorts"),
+        "ideas": ideas,
+        "editing_notes": [
+            "Keep each clip focused on one idea.",
+            "Add subtitles for mobile viewers.",
+            "Cut silence and repeated words.",
+            "Open with the strongest sentence.",
+            "Do not use copyrighted video/audio without permission.",
+        ],
+    }

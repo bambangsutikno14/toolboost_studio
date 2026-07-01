@@ -10,10 +10,11 @@ BRAND = {
 }
 
 INTERNAL_LINKS = [
+    {"label": "Creator Content Pack", "url": "/tools/creator-content-pack"},
+    {"label": "Shorts Script Generator", "url": "/tools/shorts-script-generator"},
+    {"label": "Thumbnail Text Maker", "url": "/tools/thumbnail-text-maker"},
+    {"label": "Content Calendar Generator", "url": "/tools/content-calendar-generator"},
     {"label": "SEO Title Generator", "url": "/tools/title-generator"},
-    {"label": "Meta Description Generator", "url": "/tools/meta-description"},
-    {"label": "Keyword Density Checker", "url": "/tools/keyword-density-checker"},
-    {"label": "Content Brief Generator", "url": "/tools/content-brief-generator"},
     {"label": "Guides", "url": "/guides"},
 ]
 

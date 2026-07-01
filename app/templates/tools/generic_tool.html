@@ -9,7 +9,49 @@
   <p><strong>Target user:</strong> {{ tool.intent }} | <strong>Keyword:</strong> {{ tool.keyword }}</p>
 
   <form method="post" class="tool-form">
-    {% if tool.slug in ["title-generator", "meta-description"] %}
+    {% if tool.slug == "creator-content-pack" %}
+      <label>Niche / content idea</label><input name="niche" value="{{ form.get('niche','') }}" placeholder="example: ASMR rain, affiliate product review, cooking tips">
+      <label>Platform</label><select name="platform">
+        {% for p in ["YouTube Shorts","TikTok","Instagram Reels","YouTube","Blog"] %}<option value="{{ p }}" {% if form.get('platform','YouTube Shorts') == p %}selected{% endif %}>{{ p }}</option>{% endfor %}
+      </select>
+      <label>Target audience</label><input name="audience" value="{{ form.get('audience','beginner creators') }}" placeholder="example: United States viewers, beginner creators">
+      <label>Tone</label><select name="tone">
+        {% for t in ["educational","relaxing","viral","professional","funny"] %}<option value="{{ t }}" {% if form.get('tone','educational') == t %}selected{% endif %}>{{ t }}</option>{% endfor %}
+      </select>
+      <label>Goal</label><select name="goal">
+        {% for g in ["growth","engagement","monetization","affiliate","consistency"] %}<option value="{{ g }}" {% if form.get('goal','growth') == g %}selected{% endif %}>{{ g }}</option>{% endfor %}
+      </select>
+    {% elif tool.slug == "shorts-script-generator" %}
+      <label>Topic</label><input name="topic" value="{{ form.get('topic','') }}" placeholder="example: ASMR rain for sleep">
+      <label>Platform</label><select name="platform">
+        {% for p in ["YouTube Shorts","TikTok","Instagram Reels"] %}<option value="{{ p }}" {% if form.get('platform','YouTube Shorts') == p %}selected{% endif %}>{{ p }}</option>{% endfor %}
+      </select>
+      <label>Target audience</label><input name="audience" value="{{ form.get('audience','beginner creators') }}" placeholder="example: United States viewers">
+      <label>Tone</label><select name="tone">
+        {% for t in ["educational","relaxing","viral","professional","funny"] %}<option value="{{ t }}" {% if form.get('tone','educational') == t %}selected{% endif %}>{{ t }}</option>{% endfor %}
+      </select>
+      <label>Duration target</label><input name="duration" value="{{ form.get('duration','45') }}" placeholder="45">
+    {% elif tool.slug == "thumbnail-text-maker" %}
+      <label>Topic</label><input name="topic" value="{{ form.get('topic','') }}" placeholder="example: how to grow YouTube Shorts">
+      <label>Platform</label><input name="platform" value="{{ form.get('platform','YouTube Shorts') }}" placeholder="YouTube Shorts">
+      <label>Emotion / angle</label><select name="emotion">
+        {% for e in ["curiosity","beginner","problem","result","money","calm"] %}<option value="{{ e }}" {% if form.get('emotion','curiosity') == e %}selected{% endif %}>{{ e }}</option>{% endfor %}
+      </select>
+    {% elif tool.slug == "content-calendar-generator" %}
+      <label>Niche</label><input name="niche" value="{{ form.get('niche','') }}" placeholder="example: ASMR rain">
+      <label>Platform</label><select name="platform">
+        {% for p in ["YouTube Shorts","TikTok","Instagram Reels","YouTube","Blog"] %}<option value="{{ p }}" {% if form.get('platform','YouTube Shorts') == p %}selected{% endif %}>{{ p }}</option>{% endfor %}
+      </select>
+      <label>Days</label><select name="days">
+        {% for d in ["7","14","30"] %}<option value="{{ d }}" {% if form.get('days','7') == d %}selected{% endif %}>{{ d }} days</option>{% endfor %}
+      </select>
+      <label>Target audience</label><input name="audience" value="{{ form.get('audience','beginner creators') }}" placeholder="beginner creators">
+      <label>Goal</label><input name="goal" value="{{ form.get('goal','growth') }}" placeholder="growth">
+    {% elif tool.slug == "clip-idea-generator" %}
+      <label>Niche optional</label><input name="niche" value="{{ form.get('niche','') }}" placeholder="example: podcast clips, ASMR rain, tutorial">
+      <label>Platform</label><input name="platform" value="{{ form.get('platform','YouTube Shorts') }}" placeholder="YouTube Shorts">
+      <label>Transcript / notes</label><textarea name="transcript" placeholder="Paste transcript, rough notes, or talking points">{{ form.get('transcript','') }}</textarea>
+    {% elif tool.slug in ["title-generator", "meta-description"] %}
       <label>Keyword / topic</label><input name="keyword" value="{{ form.get('keyword','') }}" placeholder="example: ASMR rain">
     {% elif tool.slug == "hashtag-generator" %}
       <label>Caption / topic</label><textarea name="text" placeholder="example: asmr rain">{{ form.get('text','') }}</textarea>
@@ -103,6 +145,45 @@
       <h3>Caption</h3><p class="copybox">{{ result["data"]["caption"] }}</p>
       <h3>CTA</h3><p class="copybox">{{ result["data"]["cta"] }}</p>
       <h3>Hashtags</h3><p class="copybox">{{ " ".join(result["data"]["hashtags"]) }}</p>
+
+
+    {% elif result["type"] == "content_pack" %}
+      <div class="pack-meta"><span>{{ result["data"]["platform"] }}</span><span>{{ result["data"]["tone"] }}</span><span>{{ result["data"]["goal"] }}</span></div>
+      <h3>Titles</h3><ol>{% for item in result["data"]["titles"] %}<li class="copybox">{{ item }}</li>{% endfor %}</ol>
+      <h3>Hooks</h3><ol>{% for item in result["data"]["hooks"] %}<li class="copybox">{{ item }}</li>{% endfor %}</ol>
+      <h3>Short Script</h3>
+      <div class="timeline">{% for scene in result["data"]["script"]["scenes"] %}<div><strong>{{ scene["time"] }} - {{ scene["label"] }}</strong><p class="copybox">{{ scene["line"] }}</p></div>{% endfor %}</div>
+      <h3>YouTube Description</h3><pre class="copybox">{{ result["data"]["youtube_description"] }}</pre>
+      <h3>Social Caption</h3><p class="copybox">{{ result["data"]["social_caption"] }}</p>
+      <h3>Hashtags</h3><p class="copybox">{{ " ".join(result["data"]["hashtags"]) }}</p>
+      <h3>Thumbnail Text</h3><div class="mini-grid">{% for item in result["data"]["thumbnail_text"] %}<div class="mini-card"><strong>{{ item["text"] }}</strong><p>{{ item["style"] }} - {{ item["support"] }}</p></div>{% endfor %}</div>
+      <h3>Pinned Comment</h3><p class="copybox">{{ result["data"]["pinned_comment"] }}</p>
+      <h3>Upload Checklist</h3><ul>{% for item in result["data"]["upload_checklist"] %}<li>{{ item }}</li>{% endfor %}</ul>
+      <h3>Next Content Ideas</h3><ol>{% for item in result["data"]["next_content_ideas"] %}<li>{{ item }}</li>{% endfor %}</ol>
+
+    {% elif result["type"] == "shorts_script" %}
+      <p><strong>Platform:</strong> {{ result["data"]["platform"] }} | <strong>Duration:</strong> {{ result["data"]["duration"] }}</p>
+      <div class="timeline">{% for scene in result["data"]["scenes"] %}<div><strong>{{ scene["time"] }} - {{ scene["label"] }}</strong><p class="copybox">{{ scene["line"] }}</p></div>{% endfor %}</div>
+      <h3>Subtitle Text</h3><ol>{% for item in result["data"]["subtitle_text"] %}<li class="copybox">{{ item }}</li>{% endfor %}</ol>
+      <h3>Caption</h3><p class="copybox">{{ result["data"]["caption"] }}</p>
+      <h3>Hashtags</h3><p class="copybox">{{ " ".join(result["data"]["hashtags"]) }}</p>
+      <h3>Checklist</h3><ul>{% for item in result["data"]["checklist"] %}<li>{{ item }}</li>{% endfor %}</ul>
+
+    {% elif result["type"] == "thumbnail" %}
+      <h3>Thumbnail Text Variants</h3>
+      <div class="mini-grid">{% for item in result["data"]["variants"] %}<div class="mini-card"><strong>{{ item["text"] }}</strong><p>{{ item["style"] }} - {{ item["support"] }}</p></div>{% endfor %}</div>
+      <h3>Layout Notes</h3><ul>{% for item in result["data"]["layout_notes"] %}<li>{{ item }}</li>{% endfor %}</ul>
+      <h3>Title Pairing Ideas</h3><ol>{% for item in result["data"]["title_pairing"] %}<li class="copybox">{{ item }}</li>{% endfor %}</ol>
+
+    {% elif result["type"] == "calendar" %}
+      <p><strong>Niche:</strong> {{ result["data"]["niche"] }} | <strong>Platform:</strong> {{ result["data"]["platform"] }}</p>
+      <div class="calendar-list">{% for day in result["data"]["days"] %}<div class="calendar-card"><h3>Day {{ day["day"] }}: {{ day["angle"] }}</h3><p><strong>Title:</strong> <span class="copybox">{{ day["title"] }}</span></p><p><strong>Hook:</strong> <span class="copybox">{{ day["hook"] }}</span></p><p><strong>Caption:</strong> <span class="copybox">{{ day["caption"] }}</span></p><p><strong>Hashtags:</strong> <span class="copybox">{{ " ".join(day["hashtags"]) }}</span></p></div>{% endfor %}</div>
+      <h3>Workflow</h3><ul>{% for item in result["data"]["workflow"] %}<li>{{ item }}</li>{% endfor %}</ul>
+
+    {% elif result["type"] == "clips" %}
+      <p><strong>Topic:</strong> {{ result["data"]["topic"] }} | <strong>Platform:</strong> {{ result["data"]["platform"] }}</p>
+      <div class="calendar-list">{% for item in result["data"]["ideas"] %}<div class="calendar-card"><h3>{{ item["section"] }}</h3><p><strong>Hook:</strong> <span class="copybox">{{ item["hook"] }}</span></p><p><strong>Title:</strong> <span class="copybox">{{ item["title"] }}</span></p><p><strong>Caption:</strong> <span class="copybox">{{ item["caption"] }}</span></p><p><strong>Hashtags:</strong> <span class="copybox">{{ " ".join(item["hashtags"]) }}</span></p></div>{% endfor %}</div>
+      <h3>Editing Notes</h3><ul>{% for item in result["data"]["editing_notes"] %}<li>{{ item }}</li>{% endfor %}</ul>
 
     {% elif result["type"] == "checklist" %}
       <p>Score: {{ result["data"]["score"] }}/{{ result["data"]["total"] }}</p>

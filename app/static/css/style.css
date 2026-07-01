@@ -235,3 +235,133 @@ body {
 @media (max-width: 760px) {
   .organic-panel { grid-template-columns: 1fr; }
 }
+
+
+/* Creator Studio V7 */
+.creator-hero {
+  background:
+    linear-gradient(135deg, rgba(23,105,255,0.18), rgba(0,179,164,0.10)),
+    #ffffff;
+}
+.creator-hero h1 {
+  max-width: 920px;
+}
+.creator-workflow {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 18px;
+  margin: 22px 0;
+  padding: 24px;
+  border: 1px solid #dce6ff;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #ffffff, #f3f8ff);
+  box-shadow: 0 14px 34px rgba(23, 32, 51, 0.08);
+}
+.workflow-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  align-content: center;
+}
+.workflow-grid span,
+.pack-meta span {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #dce6ff;
+  background: #ffffff;
+  color: #172033;
+  border-radius: 999px;
+  padding: 10px 12px;
+  font-weight: 800;
+}
+.featured-card {
+  border-color: #c8d8ff;
+  background: linear-gradient(180deg, #ffffff, #f7fbff);
+}
+.feature-badge {
+  display: inline-flex;
+  margin-bottom: 10px;
+  border-radius: 999px;
+  padding: 6px 9px;
+  background: #eef4ff;
+  color: #1769ff;
+  font-size: 12px;
+  font-weight: 900;
+}
+.tool-form select {
+  width: 100%;
+  border: 1px solid #d6dbe7;
+  border-radius: 14px;
+  padding: 12px 14px;
+  background: #ffffff;
+  color: #172033;
+  font: inherit;
+}
+.pack-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0 18px;
+}
+.timeline {
+  display: grid;
+  gap: 10px;
+}
+.timeline > div,
+.calendar-card,
+.mini-card {
+  border: 1px solid #e5e8ef;
+  border-radius: 18px;
+  padding: 14px;
+  background: #ffffff;
+}
+.mini-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.mini-card strong {
+  display: block;
+  font-size: 1.35rem;
+  margin-bottom: 4px;
+}
+.calendar-list {
+  display: grid;
+  gap: 12px;
+}
+.copy-action {
+  margin: 8px 0 4px;
+  border: 1px solid #dce6ff;
+  background: #eef4ff;
+  color: #1769ff;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 900;
+  cursor: pointer;
+}
+@media (max-width: 760px) {
+  .creator-workflow,
+  .workflow-grid,
+  .mini-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero h1 {
+    font-size: 2.15rem;
+    line-height: 1.05;
+  }
+  .topbar {
+    gap: 10px;
+  }
+  .topbar nav {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 4px;
+  }
+  .tool-form input,
+  .tool-form textarea,
+  .tool-form select,
+  .tool-form button {
+    font-size: 16px;
+  }
+}

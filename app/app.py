@@ -13,7 +13,7 @@ try:
         TOOLS, GUIDES, title_ideas, meta_description, hashtag_ideas, word_counter,
         build_utm, keyword_density, slugify, content_brief, youtube_description,
         faq_generator, blog_outline, social_caption, adsense_checklist, faq_schema,
-        robots_txt, sitemap_xml
+        robots_txt, sitemap_xml, creator_content_pack, shorts_script, thumbnail_text_maker, content_calendar, clip_idea_generator
     )
 except ImportError:
     from .adsense import adsense_script, ad_block
@@ -24,7 +24,7 @@ except ImportError:
         TOOLS, GUIDES, title_ideas, meta_description, hashtag_ideas, word_counter,
         build_utm, keyword_density, slugify, content_brief, youtube_description,
         faq_generator, blog_outline, social_caption, adsense_checklist, faq_schema,
-        robots_txt, sitemap_xml
+        robots_txt, sitemap_xml, creator_content_pack, shorts_script, thumbnail_text_maker, content_calendar, clip_idea_generator
     )
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -41,6 +41,34 @@ def get_tool(slug):
     return next((t for t in TOOLS if t["slug"] == slug), None)
 
 def run_tool(slug, form):
+    if slug == "creator-content-pack":
+        return {"type": "content_pack", "title": "Creator Content Pack", "data": creator_content_pack(
+            form.get("niche", ""), form.get("platform", "YouTube Shorts"),
+            form.get("audience", "beginner creators"), form.get("tone", "educational"),
+            form.get("goal", "growth")
+        )}
+    if slug == "shorts-script-generator":
+        return {"type": "shorts_script", "title": "Shorts Script", "data": shorts_script(
+            form.get("topic", ""), form.get("platform", "YouTube Shorts"),
+            form.get("duration", "45"), form.get("tone", "educational"),
+            form.get("audience", "beginner creators")
+        )}
+    if slug == "thumbnail-text-maker":
+        return {"type": "thumbnail", "title": "Thumbnail Text Ideas", "data": thumbnail_text_maker(
+            form.get("topic", ""), form.get("platform", "YouTube Shorts"),
+            form.get("emotion", "curiosity")
+        )}
+    if slug == "content-calendar-generator":
+        return {"type": "calendar", "title": "Creator Content Calendar", "data": content_calendar(
+            form.get("niche", ""), form.get("platform", "YouTube Shorts"),
+            form.get("days", "7"), form.get("audience", "beginner creators"),
+            form.get("goal", "growth")
+        )}
+    if slug == "clip-idea-generator":
+        return {"type": "clips", "title": "Clip Ideas", "data": clip_idea_generator(
+            form.get("transcript", ""), form.get("platform", "YouTube Shorts"),
+            form.get("niche", "")
+        )}
     if slug == "title-generator":
         return {"type": "list", "title": "Title Ideas", "items": title_ideas(form.get("keyword", ""))}
     if slug == "meta-description":

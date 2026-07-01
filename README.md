@@ -77,3 +77,17 @@ tools_live_check.bat
 ### V6 audit note
 
 `tools_live_check.bat` uses case-insensitive output checks so valid title casing such as `UTM Builder` does not fail because of lowercase expectation.
+
+
+## V7 Creator Studio Direction
+
+V7 shifts ToolBoost from a generic tools collection into a creator-first workflow toolkit.
+
+Main V7 tools:
+- Creator Content Pack Generator
+- Shorts Script Generator
+- Thumbnail Text Maker
+- Content Calendar Generator
+- Clip Idea Generator
+
+The goal is to help beginner creators save time, reduce tool cost, reduce overthinking, and prepare content packages that are easier to publish from mobile devices.
